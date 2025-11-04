@@ -1,0 +1,101 @@
+:root{
+    --accent:#2563eb;
+    --muted:#f3f4f6;
+    --card:#ffffff;
+    --text:#111827;
+  }
+  *{box-sizing:border-box}
+  body{
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: #f8fafc;
+    color:var(--text);
+    margin:0;
+    padding:24px;
+  }
+  .container{
+    max-width:980px;
+    margin:0 auto;
+  }
+  .card{
+    background:var(--card);
+    border-radius:10px;
+    box-shadow: 0 1px 3px rgba(15,23,42,0.06);
+    padding:16px;
+  }
+  .header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:12px;
+  }
+  .btn{
+    background:none;
+    border:1px solid #e5e7eb;
+    padding:8px 10px;
+    border-radius:8px;
+    cursor:pointer;
+  }
+  .month{
+    font-weight:700;
+    font-size:1.25rem;
+  }
+  .calendar{
+    display:grid;
+    grid-template-columns: repeat(7,1fr);
+    gap:6px;
+  }
+  .weekday{
+    text-align:center;
+    font-size:0.8rem;
+    color:#6b7280;
+    padding:8px 4px;
+  }
+  .daycell{
+    min-height:88px;
+    border-radius:8px;
+    padding:8px;
+    background: #fbfdff;
+    border:1px solid #eef2f7;
+    position:relative;
+    overflow:hidden;
+  }
+  .daynum{
+    font-size:0.9rem;
+    font-weight:600;
+  }
+  .othermonth{
+    color:#9ca3af;
+  }
+  .today{
+    border:2px solid var(--accent);
+    box-shadow: 0 4px 14px rgba(37,99,235,0.08);
+  }
+  .events{
+    margin-top:8px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .event-badge{
+    font-size:0.78rem;
+    padding:6px 8px;
+    border-radius:6px;
+    background:#eef2ff;
+    border:1px solid #e0e7ff;
+    cursor:default;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .more{
+    font-size:0.78rem;
+    color:#374151;
+    cursor:pointer;
+    opacity:0.85;
+  }
+  @media (max-width:700px){
+    .daycell{min-height:70px}
+    .month{font-size:1rem}
+  }
+  

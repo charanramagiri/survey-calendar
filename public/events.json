@@ -1,0 +1,8 @@
+[
+    { "id": 1, "title": "Team Sync", "date": "2025-11-05", "start": "10:00", "durationMinutes": 60 },
+    { "id": 2, "title": "Interview", "date": "2025-11-05", "start": "10:30", "durationMinutes": 30 },
+    { "id": 3, "title": "Demo", "date": "2025-11-10", "start": "14:00", "durationMinutes": 45 },
+    { "id": 4, "title": "Design Review", "date": "2025-11-25", "start": "09:00", "durationMinutes": 30 },
+    { "id": 5, "title": "All Hands", "date": "2025-12-01", "start": "16:00", "durationMinutes": 60 }
+  ]
+  

@@ -98,4 +98,9 @@
     .daycell{min-height:70px}
     .month{font-size:1rem}
   }
-  
+  .daycell { padding-bottom: 6px; }
+
+  .event-badge {
+    height: 20px;
+    line-height: 20px;
+  }

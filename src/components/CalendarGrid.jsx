@@ -1,11 +1,30 @@
-import React, { useState } from "react";
-import { formatDateKey, isToday } from "../utils/dateUtils";
+// src/components/CalendarGrid.jsx
+import React, { useEffect, useState } from "react";
+import { formatDateKey } from "../utils/dateUtils";
 import DayCell from "./DayCell";
+import MobileDayList from "./MobileDayList";
 
 const weekdays = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 
 export default function CalendarGrid({ days, currentMonth, eventsByDate }) {
-  const [modalEvents, setModalEvents] = useState(null); // optional for when showing +n more
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 700);
+
+  useEffect(() => {
+    function onResize() {
+      setIsMobile(window.innerWidth <= 700);
+    }
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  // For mobile, we want only the days belonging to the current month (no prev/next month spills).
+  const monthDays = days.filter(d => d.month() === currentMonth);
+
+  if (isMobile) {
+    return (
+      <MobileDayList days={monthDays} eventsByDate={eventsByDate} />
+    );
+  }
 
   return (
     <>
@@ -23,29 +42,14 @@ export default function CalendarGrid({ days, currentMonth, eventsByDate }) {
               day={d}
               inCurrentMonth={inCurrentMonth}
               events={evs}
-              onShowMore={(events) => setModalEvents(events)}
+              onShowMore={(events) => {
+                // fallback: native alert if modal not present
+                alert(events.map(e => `${e.start || ""} ${e.title}`).join("\n"));
+              }}
             />
           );
         })}
       </div>
-
-      {/* simple modal replacement: show list when modalEvents is set */}
-      {modalEvents && (
-        <div style={{
-          position:"fixed", inset:0, background:"rgba(0,0,0,0.4)",
-          display:"flex", alignItems:"center", justifyContent:"center"
-        }} onClick={() => setModalEvents(null)}>
-          <div style={{background:"#fff", padding:16, borderRadius:8, minWidth:320}} onClick={(e)=>e.stopPropagation()}>
-            <h3>Events</h3>
-            <ul>
-              {modalEvents.map(ev => <li key={ev.id}>{ev.start} — {ev.title}</li>)}
-            </ul>
-            <div style={{textAlign:"right", marginTop:8}}>
-              <button className="btn" onClick={() => setModalEvents(null)}>Close</button>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 }

@@ -1,29 +1,36 @@
 // src/components/EventBadge.jsx
 import React from "react";
+import "./EventBadge.css";
 
 export default function EventBadge({ event }) {
-  const label = `${event.start || ""} ${event.start ? "·" : ""} ${event.title}`;
-  // color by id hash (deterministic) — simple palette
-  const palette = ["#e6f0ff","#fff1e6","#e9ffef","#fff0f6","#f0f9ff"];
-  const color = palette[event.id % palette.length];
-  const borderColor = "#dbeafe"; // light accent
+  const label = `${event.start ? event.start + " · " : ""}${event.title}`;
+  // Use a more vibrant and accessible color palette
+  const palette = [
+    "#2563EB", // Blue
+    "#dc2626", // Red
+    "#16a34a", // Green
+    "#ea580c", // Orange
+    "#9333ea", // Purple
+    "#0891b2", // Cyan
+    "#be185d", // Pink
+    "#ca8a04"  // Yellow
+  ];
+  const color = palette[(event.id || 0) % palette.length];
 
   return (
-    <div
-      className="event-badge"
-      title={label}
-      style={{
-        background: color,
-        border: `1px solid ${borderColor}`,
-        padding: "4px 6px",
-        fontSize: "0.72rem",
-        borderRadius: 6,
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        whiteSpace: "nowrap"
-      }}
-    >
-      {label}
+    <div className="event-badge compact" tabIndex={0} style={{background: color}}>
+      <span className="ev-label">
+        {label}
+      </span>
+
+      <div className="ev-tooltip" role="tooltip" aria-hidden>
+        <div className="tp-title">{event.title}</div>
+        <div className="tp-time">
+          {event.start ? event.start : "All day"}
+          {event.durationMinutes ? ` • ${event.durationMinutes}m` : ""}
+        </div>
+        {event.description && <div className="tp-desc">{event.description}</div>}
+      </div>
     </div>
   );
 }

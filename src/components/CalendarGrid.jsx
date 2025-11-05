@@ -28,10 +28,10 @@ export default function CalendarGrid({ days, currentMonth, eventsByDate }) {
 
   return (
     <>
-      <div className="calendar">
+      <div className="calendar weekdays-row">
         {weekdays.map(w => <div key={w} className="weekday">{w}</div>)}
       </div>
-      <div className="calendar" style={{marginTop:8}}>
+      <div className="calendar days-row">
         {days.map((d) => {
           const key = formatDateKey(d);
           const inCurrentMonth = d.month() === currentMonth;

@@ -15,11 +15,11 @@ export default function DayCell({ day, inCurrentMonth, events = [], onShowMore }
   const visible = arranged.slice(0, visibleCount);
   const hiddenCount = Math.max(0, events.length - visible.length);
 
+  const isWeekend = day.day() === 0 || day.day() === 6;
+
   return (
-    <div className={`daycell ${todayHighlight}`} aria-label={`Day ${key}`}>
-      <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
-        <div className={`daynum ${inCurrentMonth ? "" : "othermonth"}`}>{day.date()}</div>
-      </div>
+    <div className={`daycell ${todayHighlight} ${isWeekend ? "weekend" : ""}`} aria-label={`Day ${key}`}>
+      <div className={`daynum ${inCurrentMonth ? "" : "othermonth"}`}>{day.date()}</div>
 
       <div style={{position:"relative", marginTop:8, minHeight: (maxRows * 22) + "px"}}>
         {visible.map(ev => {
@@ -46,7 +46,7 @@ export default function DayCell({ day, inCurrentMonth, events = [], onShowMore }
         })}
 
         {hiddenCount > 0 && (
-          <div className="more" style={{position:"absolute", bottom:2, right:4}} onClick={() => onShowMore(events)}>
+          <div className="more" style={{position:"absolute", bottom:4, right:8}} onClick={() => onShowMore(events)}>
             {`+${hiddenCount} more`}
           </div>
         )}

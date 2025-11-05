@@ -1,0 +1,68 @@
+.event-badge {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.event-badge:focus,
+.event-badge:hover {
+  transform: translateY(-2px);
+}
+
+.ev-tooltip {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  bottom: 100%;
+  display: none;
+  width: 240px;
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 8px 24px var(--shadow-lg);
+  z-index: 100;
+  font-size: 0.875rem;
+  color: var(--foreground);
+  text-align: left;
+}
+
+.event-badge:hover .ev-tooltip,
+.event-badge:focus .ev-tooltip {
+  display: block;
+}
+
+.tp-title {
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--foreground);
+  font-size: 0.95rem;
+}
+
+.tp-time {
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin-bottom: 8px;
+}
+
+.tp-desc {
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin-top: 8px;
+}
+
+/* Arrow for tooltip */
+.ev-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--card-bg);
+}
+
+[data-theme="dark"] .ev-tooltip::after {
+  border-top-color: var(--card-bg);
+}
